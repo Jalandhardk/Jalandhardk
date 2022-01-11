@@ -18,9 +18,20 @@ pipeline {
       }
     }
 
-    stage('monitor') {
-      steps {
-        bat 'mvn -v'
+    stage('SanityTest') {
+      parallel {
+        stage('SanityTest') {
+          steps {
+            bat 'java -version'
+          }
+        }
+
+        stage('IntegrationTests') {
+          steps {
+            bat 'java -v'
+          }
+        }
+
       }
     }
 
